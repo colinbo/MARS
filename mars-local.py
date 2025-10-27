@@ -8,15 +8,16 @@ def run():
     argv = [
     ]
 
-    p = beam.Pipeline(argv=argv)
     input = 'sample/*.csv'
     output = 'output/output'
     
-    (p
-     | 'Read Files' >> beam.io.ReadFromText(input)
-     | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
-     | 'Write Output' >> beam.io.WriteToText(output)
-     )
+    with beam.Pipeline(argv=argv) as p:
+      (p
+       | 'Read Files' >> beam.io.ReadFromText(input)
+       | 'Process Lines' >> beam.FlatMap(processline)
+       | 'Write Output' >> beam.io.WriteToText(output)
+      )
+
     p.run()
 
 if __name__ == '__main__':
