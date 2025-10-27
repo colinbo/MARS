@@ -22,20 +22,20 @@ def run():
       '--temp_location=gs://' + bucketname + '/temploc/',
       '--max_num_workers=2',
       '--machine_type=e2-standard-2',
-      '--service_account_email=marssa@' + projectname + ".iam.gserviceaccount.com",
+      '--service_account_email=710090803393-compute@' + projectname + ".iam.gserviceaccount.com",
       '--save_main_session'
     ]
 
-    p = beam.Pipeline(argv=argv)
     input = 'gs://mars-sample/*.csv'
     # input = 'gs://mars-production/*.csv'
     output = 'gs://' + bucketname + '/output/output'
 
-    (p
-     | 'Read Files' >> beam.io.ReadFromText(input)
-     | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
-     | 'Write Output' >> beam.io.WriteToText(output)
-     )
+    with beam.Pipeline(argv=argv) as p:
+        (p
+         | 'Read Files' >> beam.io.ReadFromText(input)
+         | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
+         | 'Write Output' >> beam.io.WriteToText(output)
+         )
     p.run()
 
 if __name__ == '__main__':
