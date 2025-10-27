@@ -25,20 +25,20 @@ def run():
       '--temp_location=gs://' + bucketname + '/temploc/',
       '--max_num_workers=2',
       '--machine_type=e2-standard-2',
-      '--service_account_email=marssa@' + projectname + ".iam.gserviceaccount.com"
+      '--service_account_email=710090803393-compute@developer.gserviceaccount.com'
       '--save_main_session'
     ]
 
-    p = beam.Pipeline(argv=argv)
     subscription = "projects/" + projectname + "/subscriptions/activities-subscription"
     outputtable = projectname + ":mars.raw"
     
     print("Starting Beam Job - next step start the pipeline")
-    (p
-     | 'Read Messages' >> beam.io.ReadFromPubSub(subscription=subscription)
-     | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
-     | 'Write Output' >> beam.io.WriteToBigQuery(outputtable)
-     )
+    with beam.Pipeline(argv=argv) as p:
+        (p
+         | 'Read Messages' >> beam.io.ReadFromPubSub(subscription=subscription)
+         | 'Process Lines' >> beam.FlatMap(lambda line: processline(line))
+         | 'Write Output' >> beam.io.WriteToBigQuery(outputtable)
+         )
     p.run()
 
 
