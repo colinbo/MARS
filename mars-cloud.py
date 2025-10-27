@@ -22,7 +22,7 @@ def run():
       '--temp_location=gs://' + bucketname + '/temploc/',
       '--max_num_workers=2',
       '--machine_type=e2-standard-2',
-      '--service_account_email=710090803393-compute@developer.gserviceaccount.com",
+      '--service_account_email=710090803393-compute@developer.gserviceaccount.com',
       '--save_main_session'
     ]
 
