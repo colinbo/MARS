@@ -13,6 +13,8 @@ def run():
     bucketname = os.getenv('GOOGLE_CLOUD_PROJECT') + '-bucket'
     jobname = 'mars-job-' + datetime.datetime.now().strftime("%Y%m%d%H%M")
     region = 'us-central1'
+    serviceaccount = os.getenv('SERVICE_ACCOUNT_EMAIL')
+    print(serviceaccount)
 
     # https://cloud.google.com/dataflow/docs/reference/pipeline-options
     argv = [
@@ -25,7 +27,7 @@ def run():
       '--temp_location=gs://' + bucketname + '/temploc/',
       '--max_num_workers=2',
       '--machine_type=e2-standard-2',
-      '--service_account_email=710090803393-compute@developer.gserviceaccount.com',
+      '--service_account_email=' + serviceaccount,
       '--save_main_session'
     ]
 
