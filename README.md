@@ -3,9 +3,9 @@ Monitoring, Auditing and Reporting System (MARS)
  
 ## Clone in the Repo
 Open Cloud Shell\
-Clone in the `https://github.com/ROIGCP/Mars` repo\
-    Command: `git clone https://github.com/ROIGCP/Mars`\
-    Command: `cd Mars`
+Clone in the `https://github.com/colinbo/Mars` repo\
+    Command: `git clone https://github.com/colinbo/Mars`\
+    Command: `cd MARS`
 
 ## GETTING MARS WORKING IN CLOUDSHELL (run prep-project.sh)
 Make sure you have a project set\
@@ -17,13 +17,6 @@ Bucket named projectid-bucket\
 Dataflow API enabled  (enabled via script in run-cloud.sh)\
     Command: `gcloud services enable dataflow.googleapis.com`
 
-Create a Service Account called marssa
-    Command: `gcloud iam service-accounts create marssa`
-
-Grant marssa@PROJECTID.iam.gserviceaccount.com the roles/editor 
-(NOTE: for production, reduce this permission to roles/dataflow.worker and access to resources it requires - GCS Bucket, BigQuery, etc)
-    Command: `gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member serviceAccount:marssa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/editor`
-    Command: `gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member serviceAccount:marssa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/dataflow.worker`
 
 BigQuery Dataset called "mars"\
     Command: `bq mk mars`
