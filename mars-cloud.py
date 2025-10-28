@@ -12,6 +12,7 @@ def run():
     jobname = 'mars-job' + datetime.datetime.now().strftime("%Y%m%d%H%M")
     region = 'us-central1'
     serviceaccount = os.getenv('SERVICE_ACCOUNT_EMAIL')
+    print(serviceaccount)
 
     # https://cloud.google.com/dataflow/docs/reference/pipeline-options
     argv = [
