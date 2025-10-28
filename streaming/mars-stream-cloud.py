@@ -4,7 +4,16 @@ import os
 import datetime
 
 def processline(line):
-    outputrow = {'message' : line}
+    strline = str(line)
+    parameters=strline.split(",")
+    dateserial = parameters[0]
+    ipaddr = parameters[1]
+    action = parameters[2]
+    srcacct = parameters[3]
+    destacct = parameters[4]
+    amount = float(parameters[5])
+    name = parameters[6]
+    outputrow = {'timestamp' : dateserial, 'ipaddr' : ipaddr, 'action' : action, 'srcacct' : srcacct, 'destacct' : destacct, 'amount' : amount, 'customername' : name}
     yield outputrow
 
 
@@ -32,7 +41,7 @@ def run():
     ]
 
     subscription = "projects/" + projectname + "/subscriptions/activities-subscription"
-    outputtable = projectname + ":mars.raw"
+    outputtable = projectname + ":mars.activities"
     
     print("Starting Beam Job - next step start the pipeline")
     with beam.Pipeline(argv=argv) as p:
