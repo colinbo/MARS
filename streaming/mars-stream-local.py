@@ -3,7 +3,8 @@ import apache_beam as beam
 import os
 
 def processline(line):
-    outputrow = {'message' : line}
+    decodeline = line.decode('utf-8')
+    outputrow = {'message' : decodeline}
     print(outputrow)
     yield outputrow
 
