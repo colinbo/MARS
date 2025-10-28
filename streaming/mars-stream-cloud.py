@@ -4,7 +4,7 @@ import os
 import datetime
 
 def processline(line):
-    strline = str(line)
+    strline = line.decode('utf-8')
     parameters=strline.split(",")
     dateserial = parameters[0]
     ipaddr = parameters[1]
